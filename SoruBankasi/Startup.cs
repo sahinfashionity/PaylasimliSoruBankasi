@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SoruBankasi.Models.Db;
+using Microsoft.EntityFrameworkCore;
 
 namespace SoruBankasi
 {
@@ -30,6 +31,9 @@ namespace SoruBankasi
         {
             // Add framework services.
             services.AddMvc();
+
+            var connection = @"Server=NICO\SQLEXPRESS;Database=psb;Trusted_Connection=True;";
+            services.AddDbContext<PsbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
