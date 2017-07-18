@@ -32,8 +32,7 @@ namespace SoruBankasi
             // Add framework services.
             services.AddMvc();
 
-            var connection = @"Server=NICO\SQLEXPRESS;Database=psb;Trusted_Connection=True;";
-            services.AddDbContext<PsbContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<PsbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PaylasimliSoruBankasiDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,47 +12,47 @@ namespace SoruBankasi.Migrations
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.2")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            //modelBuilder
+            //    .HasAnnotation("ProductVersion", "1.1.2")
+            //    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SoruBankasi.Models.Db.Blog", b =>
-                {
-                    b.Property<int>("BlogId")
-                        .ValueGeneratedOnAdd();
+            //modelBuilder.Entity("SoruBankasi.Models.Db.Blog", b =>
+            //    {
+            //        b.Property<int>("BlogId")
+            //            .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Url");
+            //        b.Property<string>("Url");
 
-                    b.HasKey("BlogId");
+            //        b.HasKey("BlogId");
 
-                    b.ToTable("Blogs");
-                });
+            //        b.ToTable("Blogs");
+            //    });
 
-            modelBuilder.Entity("SoruBankasi.Models.Db.Post", b =>
-                {
-                    b.Property<int>("PostId")
-                        .ValueGeneratedOnAdd();
+            //modelBuilder.Entity("SoruBankasi.Models.Db.Post", b =>
+            //    {
+            //        b.Property<int>("PostId")
+            //            .ValueGeneratedOnAdd();
 
-                    b.Property<int>("BlogId");
+            //        b.Property<int>("BlogId");
 
-                    b.Property<string>("Content");
+            //        b.Property<string>("Content");
 
-                    b.Property<string>("Title");
+            //        b.Property<string>("Title");
 
-                    b.HasKey("PostId");
+            //        b.HasKey("PostId");
 
-                    b.HasIndex("BlogId");
+            //        b.HasIndex("BlogId");
 
-                    b.ToTable("Posts");
-                });
+            //        b.ToTable("Posts");
+            //    });
 
-            modelBuilder.Entity("SoruBankasi.Models.Db.Post", b =>
-                {
-                    b.HasOne("SoruBankasi.Models.Db.Blog", "Blog")
-                        .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+            //modelBuilder.Entity("SoruBankasi.Models.Db.Post", b =>
+            //    {
+            //        b.HasOne("SoruBankasi.Models.Db.Blog", "Blog")
+            //            .WithMany("Posts")
+            //            .HasForeignKey("BlogId")
+            //            .OnDelete(DeleteBehavior.Cascade);
+            //    });
         }
     }
 }
