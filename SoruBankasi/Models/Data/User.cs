@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SoruBankasi.Models.Db
+namespace SoruBankasi.Models.Data
 {
     public class User
     {

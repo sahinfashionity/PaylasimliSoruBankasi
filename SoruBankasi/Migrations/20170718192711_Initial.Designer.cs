@@ -8,9 +8,10 @@ using SoruBankasi.Models.Db;
 namespace SoruBankasi.Migrations
 {
     [DbContext(typeof(PsbContext))]
-    partial class PsbContextModelSnapshot : ModelSnapshot
+    [Migration("20170718192711_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
