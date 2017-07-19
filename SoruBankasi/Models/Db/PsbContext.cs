@@ -15,6 +15,11 @@ namespace SoruBankasi.Models.Db
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Question> Questions { get; set; }
     }

@@ -7,7 +7,7 @@ namespace SoruBankasi.Models.Data
 {
     public class Question
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Definition { get; set; }
 
         public int UserId { get; set; }

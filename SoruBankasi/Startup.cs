@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SoruBankasi.Models.Db;
 using Microsoft.EntityFrameworkCore;
+using SoruBankasi.Models.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SoruBankasi.Services;
 
 namespace SoruBankasi
 {
@@ -29,10 +32,37 @@ namespace SoruBankasi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
+            services.AddDbContext<PsbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PaylasimliSoruBankasiDb")));
+
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<PsbContext>().AddDefaultTokenProviders();
+
             services.AddMvc();
 
-            services.AddDbContext<PsbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PaylasimliSoruBankasiDb")));
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // Cookie settings
+                options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+                options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOut";
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            // Add application services.
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +82,8 @@ namespace SoruBankasi
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
