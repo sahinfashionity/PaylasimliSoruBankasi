@@ -8,5 +8,6 @@ namespace SoruBankasi.Models.Data
 {
     public class User:IdentityUser
     {
+        public virtual Question Question { get; set; }
     }
 }
